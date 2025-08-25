@@ -1,0 +1,53 @@
+
+CREATE DATABASE INMOBILIARY;
+USE INMOBILIARY;
+
+
+-- Table: Owner
+CREATE TABLE Owner (
+    IdOwner INT PRIMARY KEY IDENTITY(1,1),
+    Name NVARCHAR(100) NOT NULL,
+    Address NVARCHAR(200),	
+    FileName [VARCHAR](220) DEFAULT NULL,
+    ContentType [VARCHAR](120) DEFAULT NULL,
+    Photo VARBINARY(MAX) NULL,	
+    Birthday DATE
+);
+
+-- Table: Property
+CREATE TABLE Property (
+    IdProperty INT PRIMARY KEY IDENTITY(1,1),
+    Name NVARCHAR(100) NOT NULL,
+    Address NVARCHAR(200),
+    Price DECIMAL(18,2) NOT NULL,
+    CodeInternal NVARCHAR(50) UNIQUE,
+    Year INT,
+    IdOwner INT NOT NULL,
+    CONSTRAINT FK_Property_Owner FOREIGN KEY (IdOwner)
+        REFERENCES Owner(IdOwner)
+);
+
+-- Table: PropertyImage
+CREATE TABLE PropertyImage (
+    IdPropertyImage INT PRIMARY KEY IDENTITY(1,1),
+    IdProperty INT NOT NULL,
+   -- File NVARCHAR(255) NOT NULL,
+    FileName [VARCHAR](220) DEFAULT NULL,
+    ContentType [VARCHAR](120) DEFAULT NULL,
+    Photo VARBINARY(MAX) NULL,
+    Enabled BIT DEFAULT 1,
+    CONSTRAINT FK_PropertyImage_Property FOREIGN KEY (IdProperty)
+        REFERENCES Property(IdProperty)
+);
+
+-- Table: PropertyTrace
+CREATE TABLE PropertyTrace (
+    IdPropertyTrace INT PRIMARY KEY IDENTITY(1,1),
+    DateSale DATE NOT NULL,
+    Name NVARCHAR(100),
+    Value DECIMAL(18,2) NOT NULL,
+    Tax DECIMAL(18,2) NOT NULL,
+    IdProperty INT NOT NULL,
+    CONSTRAINT FK_PropertyTrace_Property FOREIGN KEY (IdProperty)
+        REFERENCES Property(IdProperty)
+);

@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prueba Tecnica</title>
+  <base href="/">
+
+  <!-- CSS -->
+  <link href="assets/Plantilla-Ins/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/Plantilla-Ins/font-awesome/css/font-awesome.css" rel="stylesheet">
+  <link href="assets/Plantilla-Ins/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+  <link href="assets/Plantilla-Ins/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+
+  <link href="assets/Plantilla-Ins/css/plugins/chosen/chosen.css" rel="stylesheet">
+  <link href="assets/Plantilla-Ins/css/animate.css" rel="stylesheet">
+  <link href="assets/Plantilla-Ins/css/style.css" rel="stylesheet">
+  <link href="assets/Plantilla-Ins/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
+  <link href="assets/Imagenes/pavicon.png" rel="icon">
+  <link href="assets/Plantilla-Ins/css/plugins/chosen/chosen.css" rel="stylesheet">
+
+
+
+  <!-- Mainly scripts -->
+  <script src="assets/Plantilla-Ins/js/jquery-2.1.1.js"></script>
+  <script src="assets/Plantilla-Ins/js/bootstrap.min.js"></script>
+  <script src="assets/Plantilla-Ins/js/plugins/toastr/toastr.min.js"></script>
+
+  <script src="assets/Plantilla-Ins/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+  <script src="assets/Plantilla-Ins/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+  <!-- Custom and plugin javascript -->
+  <script src="assets/Plantilla-Ins/js/inspinia.js"></script>
+  <script src="assets/Plantilla-Ins/js/plugins/pace/pace.min.js"></script>
+
+  <script src="assets/Plantilla-Ins/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+  <script src="assets/Plantilla-Ins/js/plugins/dataTables/datatables.min.js"></script>
+
+
+</head>
+
+<body>
+
+  <app-root></app-root>
+
+  <script>$(document).ready(function () {
+      $('.dataTables-example').DataTable({
+        pageLength: 25,
+        responsive: true,
+        dom: '<"html5buttons"B>lTfgitp',
+        buttons: [
+          { extend: 'copy' },
+          { extend: 'csv' },
+          { extend: 'excel', title: 'ExampleFile' },
+          { extend: 'pdf', title: 'ExampleFile' },
+
+          {
+            extend: 'print',
+            customize: function (win) {
+              $(win.document.body).addClass('white-bg');
+              $(win.document.body).css('font-size', '10px');
+
+              $(win.document.body).find('table')
+                .addClass('compact')
+                .css('font-size', 'inherit');
+            }
+          }
+        ]
+      });
+    });</script>
+
+</body>
+</html>

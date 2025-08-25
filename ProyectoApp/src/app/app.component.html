@@ -1,0 +1,14 @@
+
+
+<div>
+
+  <div class="gray-bg" *ngIf="!IsLogued()">
+    <app-login></app-login>
+  </div>
+
+  <div *ngIf="IsLogued()">
+    <app-nav-bar></app-nav-bar>
+    <app-work-space></app-work-space>
+  </div>
+
+</div>

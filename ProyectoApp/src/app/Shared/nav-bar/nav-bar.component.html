@@ -1,0 +1,54 @@
+
+<div id="wrapper">
+
+  <nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+      <ul class="nav metismenu" id="side-menu">
+        <li class="nav-header">
+
+          <div align="center">
+            <div class="dropdown profile-element">
+
+              <a [routerLink]="['home']" title="Inicio" class="links">
+                <span>
+                  <img width="70" height="70" alt="image" class="img-circle" src="assets/Imagenes/perfil.jpg" />
+                </span>
+              </a>
+
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                <span class="clear">
+                  <span class="block m-t-xs">
+                    <strong class="font-bold">Usuario en Sesion</strong>
+                  </span> <span class="text-muted text-xs block">Administrador <b class="caret"></b></span>
+                </span>
+              </a>
+
+              <ul class="dropdown-menu animated fadeInRight m-t-xs">
+
+                <li class="divider"></li>
+                <li><a (click)="LogOut()">Cerrar Sesion</a></li>
+
+              </ul>
+            </div>
+          </div>
+
+          <div class="logo-element">
+            DL
+          </div>
+        </li>
+
+        <li>
+          <a href=""><i class="fa fa-cogs"></i> <span class="nav-label">Administracion</span> <span class="fa arrow"></span></a>
+          <ul class="nav nav-second-level collapse">
+            <li> <a [routerLink]="['owner']">Propietarios</a> </li>
+            <li> <a [routerLink]="['property']">Propiedades</a> </li>
+            <li> <a [routerLink]="['galery']">Galeria</a> </li>
+          </ul>
+        </li>
+
+
+      </ul>
+    </div>
+  </nav>
+
+</div>

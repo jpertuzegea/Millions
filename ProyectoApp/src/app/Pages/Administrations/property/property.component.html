@@ -1,0 +1,192 @@
+
+
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <br>
+    <a data-toggle="modal" class="btn btn-primary" id="btnNuevaPropiedad" (click)="ShowModal(true,'Registro')">Nueva Propiedad</a>
+  </div>
+  <div class="col-lg-2">
+  </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+
+        <div class="ibox-title">
+          <h5 align="center">Listado de Propiedades existentes en el sistema</h5>
+
+          <div class="ibox-tools">
+            <a class="collapse-link">
+              <i class="fa fa-chevron-up"></i>
+            </a>
+
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <i class="fa fa-wrench"></i>
+            </a>
+
+            <a class="close-link">
+              <i class="fa fa-times"></i>
+            </a>
+
+          </div>
+        </div>
+
+
+        <div class="ibox-content">
+          <div class="table-responsive">
+
+            <table class="table table-striped table-bordered table-hover dataTables-example">
+
+              <thead>
+                <tr>
+
+                  <th>IdProperty</th>
+                  <th>Name</th>
+                  <th>Address</th>
+                  <th>Price</th>
+                  <th>CodeInternal</th>
+                  <th>Year</th>
+
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+
+                </tr>
+              </thead>
+
+              <tbody *ngIf="List && List?.length != 0">
+
+                <tr *ngFor="let item of List">
+
+                  <td> {{item.IdProperty}} </td>
+                  <td> {{item.Name}} </td>
+                  <td> {{item.Address}} </td>
+                  <td> {{item.Price}} </td>
+                  <td> {{item.CodeInternal}} </td>
+                  <td> {{item.Year}} </td>
+
+                  <td align="center">
+                    <a (click)="ViewProperty(item.IdProperty)" title="Modificar Propiedad" data-toggle="modal" id="{{item.IdProperty}}"><i class="fa fa-edit"></i></a>
+                  </td>
+
+                  <td align="center">
+                    <a (click)="DeleteProperty(item.IdProperty)" title="Eliminar Propiedad" data-toggle="modal" id="{{item.IdProperty}}"><i class="fa fa-trash"></i></a>
+                  </td>
+
+                  <td align="center">
+                    <a title="Gestion Imagenes Propiedad" (click)="ViewPropertyImages(item.IdProperty, item.CodeInternal)" data-toggle="modal" id="{{item.IdProperty}}"><i class="fa fa-download"></i></a>
+                  </td>
+
+                  <td align="center">
+                    <a title="Trazabilidad" (click)="ViewPropertyTrace(item.IdProperty, item.CodeInternal)" data-toggle="modal" id="{{item.IdProperty}}"><i class="fa fa-binoculars"></i></a>
+                  </td>
+
+                </tr>
+
+              </tbody>
+              <tfoot>
+                <tr>
+
+                  <th>IdProperty</th>
+                  <th>Name</th>
+                  <th>Address</th>
+                  <th>Price</th>
+                  <th>CodeInternal</th>
+                  <th>Year</th>
+
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--Estructu
+ra del Modal-->
+<div style="overflow-y: scroll;" class="modal inmodal" id="myModal2" [ngClass]="{'show':showModal}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+
+  <div class="modal-dialog">
+    <div class="modal-content animated flipInY">
+      <div id="contenido">
+
+        <form (submit)="SaveChanges()" [formGroup]="form">
+
+          <div class="modal-header">
+            <button (click)="ShowModal(false,'Registro')" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 style="color:#1ab394" class="modal-title">Formulario de {{Action}} de Propietario</h4>
+          </div>
+          <div class="modal-body">
+
+            <div class="row">
+
+              <div class="col-sm-6 b-r">
+                <h3 class="m-t-none m-b"></h3>
+
+                <input type="hidden" class="form-control" formControlName="IdProperty" />
+
+                <div class="form-group">
+                  <label>Name</label>
+                  <input type="text" class="form-control" formControlName="Name" />
+                </div>
+
+                <div class="form-group">
+                  <label>Direccion</label>
+                  <input type="text" class="form-control" formControlName="Address" />
+                </div>
+
+                <div class="form-group">
+                  <label>Precio</label>
+                  <input type="number" class="form-control" formControlName="Price" />
+                </div>
+
+              </div>
+
+              <div class="col-sm-6">
+                <br>
+
+                <div class="form-group">
+                  <label>Codigo Interno</label>
+                  <input type="text" class="form-control" formControlName="CodeInternal" />
+                </div>
+
+                <div class="form-group">
+                  <label>Año</label>
+                  <input type="text" class="form-control" formControlName="Year" />
+                </div>
+
+                <div class="form-group">
+                  <label>Propietario</label>
+                  <select class="form-control" formControlName="IdOwner">
+                    <option *ngIf="Action=='Registro'" value="" selected>Seleccione una opción</option>
+                    <option *ngFor="let item of ListOwners" value="{{item.Value}}">{{item.Text}}</option>
+                  </select>
+                </div>
+
+              </div>
+
+              <div class="col-sm-4 "></div>
+
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button class="btn btn-sm btn-primary pull-right m-t-n-xs" id="BotonRegistrar" type="submit"><strong>Guardar</strong></button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
